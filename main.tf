@@ -35,9 +35,6 @@ resource "aws_ssoadmin_permission_set" "default" {
 }
 
 resource "aws_ssoadmin_permission_set_inline_policy" "default" {
-  # I'm using count here instead of for_each because there can
-  # only be one inline policy per peermission set. Docs here:
-  # http://glg.link/uV7ZA
   count = var.inline_policy == "" ? 0 : 1
 
   instance_arn       = aws_ssoadmin_permission_set.default.instance_arn
@@ -93,6 +90,6 @@ resource "aws_ssoadmin_account_assignment" "user" {
 }
 
 module "label" {
-  source = "git::https://github.com/glg-public/terraform-null-label.git?ref=tags/0.17.0"
+  source = "git::https://github.com/getwilbur/terraform-null-label.git?ref=tags/0.25.0"
   tags   = var.tags
 }
